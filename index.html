@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASO Model Fabrika - Standart Zaman Ölçümü</title>
+    <style>
+        :root {
+           --primary-blue: #004a99;
+           --dark-blue: #003366;
+           --bg-color: #f4f7f9;
+        }
+
+        body {
+           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+           background-color: var(--bg-color);
+           margin: 0;
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           min-height: 100vh;
+        }
+
+        .header {
+           text-align: center;
+           padding: 30px;
+           width: 100%;
+           background: white;
+           box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .brand-title {
+           font-weight: 800;
+           color: #333;
+           font-size: 28px;
+           letter-spacing: 1px;
+           margin-bottom: 5px;
+        }
+
+        h2 {
+           color: var(--primary-blue);
+           margin: 0;
+           font-size: 20px;
+           font-weight: 700;
+           text-transform: uppercase;
+        }
+
+        .button-group {
+           display: flex;
+           flex-wrap: wrap;
+           justify-content: center;
+           gap: 12px;
+           margin: 35px 15px;
+           max-width: 1100px;
+        }
+
+        .btn {
+           padding: 15px 28px;
+           font-size: 13px;
+           font-weight: 700;
+           color: white;
+           background-color: var(--primary-blue);
+           border: none;
+           border-radius: 50px;
+           cursor: pointer;
+           transition: all 0.3s ease;
+           text-transform: uppercase;
+           box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+           background-color: var(--dark-blue);
+           transform: translateY(-2px);
+        }
+
+        .btn.active {
+           background-color: #222 !important;
+           color: white;
+        }
+
+        .main-stage {
+           width: 95%;
+           max-width: 1100px;
+           background: white;
+           padding: 15px;
+           border-radius: 20px;
+           box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+           margin-bottom: 50px;
+        }
+
+        .video-container {
+           position: relative;
+           padding-bottom: 56.25%;
+           height: 0;
+           overflow: hidden;
+           border-radius: 15px;
+           background: #000;
+        }
+
+        .video-container iframe {
+           position: absolute;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           border: none;
+        }
+
+        @media (max-width: 600px) {
+           .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="brand-title">ASO MODEL FABRİKA</div>
+        <h2>STANDART ZAMAN ÖLÇÜMÜ</h2>
+    </div>
+
+    <div class="button-group">
+        <button id="firstBtn" class="btn" onclick="play(this, 'Dyc5LU0I5Gs')">Ön Montaj</button>
+        <button class="btn" onclick="play(this, 'Uw6AwHqc0YA')">D40 Montaj</button>
+        <button class="btn" onclick="play(this, 'xPY3kIyGjzM')">D25 Montaj</button>
+        <button class="btn" onclick="play(this, 'dU-rM0i97x4')">Fonksiyonel Test</button>
+        <button class="btn" onclick="play(this, 'cQgq-e7WZAA')">Paketleme</button>
+    </div>
+
+    <div class="main-stage">
+        <div class="video-container">
+            <iframe id="videoPlayer" 
+                    src="" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+
+    <script>
+        function play(btn, id) {
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const player = document.getElementById('videoPlayer');
+            
+            // youtube-nocookie kullanarak gizlilik ve çerez kaynaklı engelleri aşarız.
+            // origin parametresi ile site domaininizi doğruluyoruz.
+            const siteUrl = window.location.origin;
+            const embedUrl = "https://www.youtube-nocookie.com/embed/" + id + 
+                             "?rel=0&modestbranding=1&autoplay=1&enablejsapi=1&origin=" + siteUrl;
+            
+            player.src = embedUrl;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstButton = document.getElementById('firstBtn');
+            if (firstButton) {
+                // Sayfa ilk yüklendiğinde autoplay olmaması için manuel play çağrısı
+                const id = 'Dyc5LU0I5Gs';
+                const player = document.getElementById('videoPlayer');
+                player.src = "https://www.youtube-nocookie.com/embed/" + id + "?rel=0&modestbranding=1&origin=" + window.location.origin;
+                firstButton.classList.add('active');
+            }
+        });
+    </script>
+
+</body>
+</html>
